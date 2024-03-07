@@ -11,32 +11,37 @@ class TreeNode:
                 self.left = TreeNode(key)
             else:
                 self.left.insert(key)
-        else:
+        elif key > self.key:
             if self.right is None:
                 self.right = TreeNode(key)
             else:
                 self.right.insert(key)
 
     def print_in_order(self):
+        result = []
         if self.left:
-            self.left.print_in_order()
-        print(self.key)
+            result.extend(self.left.print_in_order())
+        result.append(str(self.key))
         if self.right:
-            self.right.print_in_order()
+            result.extend(self.right.print_in_order())
+        return result
 
     def print_pre_order(self):
-        print(self.key)
+        result = [str(self.key)]
         if self.left:
-            self.left.print_pre_order()
+            result.extend(self.left.print_pre_order())
         if self.right:
-            self.right.print_pre_order()
+            result.extend(self.right.print_pre_order())
+        return result
 
     def print_post_order(self):
+        result = []
         if self.left:
-            self.left.print_pre_order()
+            result.extend(self.left.print_post_order())
         if self.right:
-            self.right.print_pre_order()
-        print(self.key)
+            result.extend(self.right.print_post_order())
+        result.append(str(self.key))
+        return result
 
 
 def search_node(root: TreeNode, key: int):
