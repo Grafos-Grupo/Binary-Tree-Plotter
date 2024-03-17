@@ -22,10 +22,11 @@ class BinaryTreeApp(QWidget):
         self.label = QLabel('Insira o valor do nó:', self)
         self.node_input = QLineEdit(self)
 
-        self.insert_button = QPushButton('Inserir', self)
-        self.delete_button = QPushButton('Excluir', self)
-        self.list_button = QPushButton('Listar', self)
-        self.import_button = QPushButton('Importar de arquivo', self)
+        self.insert_button = QPushButton('Insert', self)
+        self.delete_button = QPushButton('Delete', self)
+        self.clear_button = QPushButton('Clear', self)
+        self.list_button = QPushButton('List', self)
+        self.import_button = QPushButton('Import file', self)
 
         self.text_output = QTextEdit(self)
         self.text_output.setReadOnly(True)
@@ -35,6 +36,7 @@ class BinaryTreeApp(QWidget):
         self.layout.addWidget(self.node_input)
         self.layout.addWidget(self.insert_button)
         self.layout.addWidget(self.delete_button)
+        self.layout.addWidget(self.clear_button)
         self.layout.addWidget(self.list_button)
         self.layout.addWidget(self.import_button)
         self.layout.addWidget(self.text_output)
@@ -42,6 +44,7 @@ class BinaryTreeApp(QWidget):
 
         self.insert_button.clicked.connect(self.insert_node_func)
         self.delete_button.clicked.connect(self.delete_node_func)
+        self.clear_button.clicked.connect(self.clear_func)
         self.list_button.clicked.connect(self.list_tree)
         self.import_button.clicked.connect(self.import_tree)
 
@@ -52,6 +55,11 @@ class BinaryTreeApp(QWidget):
 
         self.setLayout(self.layout)
 
+    def clear_func(self):
+        self.tree = None
+        self.plot_tree()
+        self.node_input.clear()
+    
     def list_tree(self):
         if self.tree:
             self.text_output.clear()
